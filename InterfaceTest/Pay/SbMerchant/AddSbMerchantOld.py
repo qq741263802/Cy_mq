@@ -31,10 +31,10 @@ list = Message.Test_message(id=str(uuid.uuid1()),
 
 	
 
-
-db= DbContext.dbSession(list.db)
-db.add(list)
-db.commit()
-db.close()
+#
+# db= DbContext.dbSession(list.db)
+# db.add(list)
+# db.commit()
+# db.close()
 
 
