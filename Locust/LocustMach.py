@@ -23,7 +23,15 @@ def mach_Info_QueryMyMachine():
         }
     }
 
-    res=requests.post(url=url,json=data,headers=headers)
+    res=requests.post(url=url,json=data,headers=headers).json()
+    common.assertEqual('Message','s操作完成',res)
+
+
+
+
+
+
+
 
 
 
@@ -38,6 +46,15 @@ def Pay_SxfMerchant_AddSbMerchantOld():
 	}
 }
     res=requests.post(url=url,json=data,headers=headers).json()
+
+
+
+
+
+mach_Info_QueryMyMachine()
+
+
+
 
 
 

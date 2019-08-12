@@ -14,4 +14,10 @@ def getnowtime():
     return now_time
 
 
+def assertEqual(arg1,arg2,msg):
+    if(msg[arg1]!=arg2):
+        print('接口请求异常：'+str(msg))
+
+
+
 
