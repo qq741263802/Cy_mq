@@ -7,9 +7,9 @@ url2 = 'http://ams-api.saas.shj188.com/api/item/goods/HuodaoGoodsSave'
 
 
 
-def FuDai():
+def fudai():
     headers = Login.gettoken()
-    info = Info.Machine_info
+    info = Info.Machine_Info
     db = DbContext.dbSession(info.db).query(info).filter(info.MachineCode == 'M31023')
     for i in db:
         MachineID = i.Code
@@ -30,7 +30,7 @@ def FuDai():
         }
         resone = requests.post(url=url1, json=data, headers=headers)
 
-        hd = Huodao.Machine_huodao
+        hd = Huodao.Machine_Huodao
         db = DbContext.dbSession(hd.db).query(hd).filter(hd.MachineId == MachineID, hd.SerialPort == SerialPort)
         for k in db:
             HuodaoCode = k.Code
@@ -65,9 +65,9 @@ def FuDai():
         dare = requests.post(url=url2, json=data2, headers=headers)
         i += 1
 
-def Gezi():
+def gezi():
     headers=Login.gettoken()
-    info = Info.Machine_info
+    info = Info.Machine_Info
     db = DbContext.dbSession(info.db).query(info).filter(info.MachineCode == 'M31030')
     for i in db:
         MachineID = i.Code
@@ -91,7 +91,7 @@ def Gezi():
             }
             resone = requests.post(url=url1, json=data, headers=headers)
 
-            hd = Huodao.Machine_huodao
+            hd = Huodao.Machine_Huodao
             db = DbContext.dbSession(hd.db).query(hd).filter(hd.MachineId == MachineID, hd.SerialPort == SerialPort)
             for k in db:
                 HuodaoCode = k.Code
@@ -131,4 +131,4 @@ def Gezi():
 
 
 
-Gezi()
+gezi()

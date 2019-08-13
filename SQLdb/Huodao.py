@@ -1,6 +1,6 @@
 #!/usr/bin/python
 # -*- coding: UTF-8 -*-
-from sqlalchemy import Column, String,Time,Boolean,Integer
+from sqlalchemy import Column, String,DateTime,Integer
 from sqlalchemy.ext.declarative import declarative_base
 # 创建对象的基类:
 Base = declarative_base()
@@ -11,7 +11,7 @@ def to_dict(self):
 
 Base.to_dict = to_dict
 
-class Machine_huodao(Base):
+class Machine_Huodao(Base):
     db = 'cy_machine'
     # 表名:
     __tablename__ = 'machine_huodao'
@@ -26,6 +26,8 @@ class Machine_huodao(Base):
     SerialPort = Column(String(200))
     #排序
     Sort=Integer()
+    #创建时间
+    Created = Column(DateTime)
 
 
 

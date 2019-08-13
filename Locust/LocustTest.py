@@ -26,8 +26,8 @@ class AmsApi(TaskSet):
 
     @task
     def QueryMyMachine(self):
-        #LocustMach.mach_Info_QueryMyMachine()
-        #LocustMach.Pay_SxfMerchant_AddSbMerchantOld()
+        # LocustMach.mach_info_queryMyMachine()
+        # LocustMach.pay_sxfMerchant_addSbMerchantOld()
         pass
 
 

@@ -22,7 +22,7 @@ id = uuid.uuid1()
 now_time = datetime.datetime.now().strftime('%Y-%m-%d %H:%M:%S')
 old = requests.post(url=url, json=data,headers=headers)
 #d = json.loads(old.text).replace('\'', '')
-list = Message.Test_message(id=str(uuid.uuid1()),
+list = Message.Test_Message(id=str(uuid.uuid1()),
                             message='yyyyy',
                             created=datetime.datetime.now().strftime('%Y-%m-%d %H:%M:%S')
                             )

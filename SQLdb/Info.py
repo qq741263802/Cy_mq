@@ -1,6 +1,6 @@
 #!/usr/bin/python
 # -*- coding: UTF-8 -*-
-from sqlalchemy import Column, String,Time,Boolean,Integer
+from sqlalchemy import Column, String,Integer,DateTime
 from sqlalchemy.ext.declarative import declarative_base
 # 创建对象的基类:
 Base = declarative_base()
@@ -11,7 +11,7 @@ def to_dict(self):
 
 Base.to_dict = to_dict
 
-class Machine_info(Base):
+class Machine_Info(Base):
     db = 'cy_machine'
     # 表名:
     __tablename__ = 'machine_info'
@@ -25,7 +25,7 @@ class Machine_info(Base):
     #SN码(机器序列号)
     MachineSerialer=Column(String(100))
     #创建时间
-    #created = Column(Time)
+    Created = Column(DateTime)
 
 
 

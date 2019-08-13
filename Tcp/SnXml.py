@@ -3,7 +3,7 @@ import xml.dom.minidom
 from SQLdb import  DbContext,Info
 
 
-def readFile(filename, lines):
+def readfile(filename, lines):
     with open(filename, 'r') as f:
         for line in f:
             line = line.rstrip(' \n')
@@ -15,15 +15,15 @@ def readFile(filename, lines):
 
 def test_info():
     list = []
-    minfo = Info.machine_info
-    managerList = DbContext.DbSet(Info.machine_info.db).query(minfo.MachineSerialer).filter().limit(100)
+    minfo = Info.Machine_Info
+    managerList = DbContext.dbSession(Info.Machine_Info.db).query(minfo.MachineSerialer).filter().limit(100)
     for i in managerList:
         list+=i
     return list
 
 
 
-def CreateXml(managerList):
+def createxml(managerList):
 
     # 在内存中创建一个空的文档
     doc = xml.dom.minidom.Document()
@@ -65,4 +65,4 @@ def CreateXml(managerList):
 
 if __name__ == '__main__':
     SN=test_info()
-    CreateXml(SN)
+    createxml(SN)

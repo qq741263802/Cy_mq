@@ -8,7 +8,7 @@ dbpass='SA@#321a'
 dbdatabase='cy_notify'
 Machineserialer_sql="select machineserialer from cy_machine.machine_info i limit 1000"
 
-def SetMachineserialer():
+def get_machineserialer():
     try:
         list = []
         db = pymysql.connect(dbhost, dbuser, dbpass, dbdatabase)
@@ -26,7 +26,7 @@ def SetMachineserialer():
 
 
 
-def DalInsert(sql):
+def dal_insert(sql):
     try:
         db = pymysql.connect(dbhost, dbuser, dbpass, dbdatabase)
         cursor = db.cursor()

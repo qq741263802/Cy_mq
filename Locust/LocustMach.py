@@ -9,7 +9,7 @@ headers = {
     "Authorization": Login.getauthorization()
 
 }
-def mach_Info_QueryMyMachine():
+def mach_info_queryMyMachine():
     url = common.host+'/api/mach/Info/QueryMyMachine'
     data = {
         "model": {
@@ -36,7 +36,7 @@ def mach_Info_QueryMyMachine():
 
 
 
-def Pay_SxfMerchant_AddSbMerchantOld():
+def pay_sxfMerchant_addSbMerchantOld():
     url = common.host+'/api/Pay/SxfMerchant/AddSbMerchantOld'
     data = {
 	"Model": {
@@ -51,7 +51,6 @@ def Pay_SxfMerchant_AddSbMerchantOld():
 
 
 
-mach_Info_QueryMyMachine()
 
 
 
