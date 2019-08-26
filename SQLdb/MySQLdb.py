@@ -33,7 +33,7 @@ def dal_insert(sql):
         cursor.execute(sql)
         db.commit()
         db.close()
-    except:
+    except :
         print(exec())
 
 

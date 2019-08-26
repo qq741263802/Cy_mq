@@ -26,7 +26,6 @@ class Machine_Info(Base):
     MachineSerialer=Column(String(100))
     #创建时间
     Created = Column(DateTime)
-
-
-
+    #设备类型
+    MachineType = Column(String(100))
 
