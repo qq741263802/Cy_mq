@@ -1,8 +1,7 @@
 # -*- coding: utf-8 -*-
-import time
-
+import time,threading
 import paho.mqtt.client as mqtt
-
+from SQLdb import Info,DbContext
 # MQTTHOST = "10.0.0.11"
 # MQTTPORT = 1883
 MQTTHOST = "94.191.11.107"
@@ -12,12 +11,14 @@ clid = str(round(t * 1000))
 mqttClient = mqtt.Client("cy895124233")
 
 
+lock = threading.Lock()
+
 # 连接MQTT服务器
-def on_mqtt_connect():
+def on_mqtt_connect(sn):
     mqttClient.username_pw_set("cykj168168", "cykj!@#$1234")
     mqttClient.connect(MQTTHOST, MQTTPORT, 60)
     mqttClient.on_connect = on_connect
-    on_publish("Test1", "123", qos=0)
+    on_publish("Test1", sn, qos=0)
     mqttClient.loop_forever()
 
 
@@ -39,6 +40,17 @@ def on_message(lient, userdata, msg):
 
 
 
+def mqtt_thread(sn_number,machinetype):
+    info = Info.Machine_Info
+    db = DbContext.dbSession(info.db).query(info).filter(
+        info.MachineType == machinetype and info.MachineCode != 'M30944').order_by(info.Created.desc()).limit(sn_number)
+    for i in db:
+        lock.acquire()
+        try:
+            th=threading.Thread(target=on_mqtt_connect, args=(i.MachineSerialer,))
+            th.start()
+        finally:
+            lock.release()
 
 
 # 当连接上服务器后回调此函数
@@ -58,7 +70,7 @@ def on_connect(client, userdata, flags, rc):
 
 
 def main():
-    on_mqtt_connect()
+    mqtt_thread(1,1)
 
 
 

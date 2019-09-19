@@ -1,6 +1,8 @@
 #coding:utf-8
 import socket,time,threading
 from SQLdb import  DbContext,Info
+from PyQt5.QtCore import *
+from PyQt5.QtWidgets import *
 from multiprocessing import Process,Pool
 
 lock = threading.Lock()
@@ -15,25 +17,31 @@ def tcpclient():
         a += 1
         for sn in db:
             s.connect(('94.191.97.65', 30670))
-            s.send(bytes( sn.MachineSerialer+ '|01|01|02|00|F0|55', encoding='utf-8'))
+            s.send(bytes('(' + sn.MachineSerialer + '|01|01|02|00|F0|55)', encoding='utf-8'))
             data = s.recv(BUFSIZ)  # 接收回应消息，接收到的是字节数组
             if not data:  # 如果接收服务器信息失败，或没有消息回应
                 break
             print(data.decode('utf-8'))
         keepclass = "我已连接" + str(a * 10) + "秒"
         print(keepclass)
-        time.sleep(15)
+        time.sleep(10)
 
-
-
+#249服务器TCP连接配置：   tcp.hk.zjgx188.com:30670
+#测试环境TCP连接配置： 94.191.97.65:30670
 def tcptest(sn):
-    s = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
-    s.connect(('94.191.97.65', 30670))
-    s.setsockopt(socket.SOL_SOCKET, socket.SO_KEEPALIVE, 1)
-    while True:
-        s.send(bytes(sn + '|01|01|02|00|F0|55', encoding='utf-8'))
-        print('发送消息'+sn+'|01|01|02|00|F0|55')
-        time.sleep(30)
+            s = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+            s.connect(('94.191.97.65', 30670))
+            s.setsockopt(socket.SOL_SOCKET, socket.SO_KEEPALIVE, 1)
+            while True:
+                try:
+                    s.send(bytes('('+sn + '|01|01|02|00|F0|55)', encoding='utf-8'))
+                    print('发送消息:' + '('+sn + '|01|01|02|00|F0|55)')
+                    time.sleep(30)
+                except:
+                    print(exec())
+                    time.sleep(1)
+
+
 
 
 def tcp_thread(sn_number,machinetype):
@@ -43,7 +51,8 @@ def tcp_thread(sn_number,machinetype):
     for i in db:
         lock.acquire()
         try:
-            threading.Thread(target=tcptest, args=(i.MachineSerialer,)).start()
+            th=threading.Thread(target=tcptest, args=(i.MachineSerialer,))
+            th.start()
         finally:
             lock.release()
 
@@ -64,5 +73,6 @@ def tcp_thread(sn_number,machinetype):
 #     # p.join()
 
 
+#tcptest('d55321a189218531')
 
 
